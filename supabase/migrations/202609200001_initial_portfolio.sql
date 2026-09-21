@@ -102,7 +102,7 @@ as $$
     select 1
     from private.admin_config
     where id = true
-      and crypt(access_secret, password_hash) = password_hash
+      and extensions.crypt(access_secret, password_hash) = password_hash
   );
 $$;
 

@@ -61,7 +61,7 @@ npm run build
 
 ```sql
 insert into private.admin_config (id, password_hash)
-values (true, crypt('ELEGIR_UNA_CLAVE_SEGURA', gen_salt('bf')))
+values (true, extensions.crypt('ELEGIR_UNA_CLAVE_SEGURA', extensions.gen_salt('bf')))
 on conflict (id) do update set password_hash = excluded.password_hash;
 ```
 
