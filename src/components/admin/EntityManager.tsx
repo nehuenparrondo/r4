@@ -11,10 +11,12 @@ interface EntityManagerProps {
   secret: string
 }
 
+/** Obtiene el título configurado para entidades con formas distintas. */
 function getItemTitle(item: PortfolioItem, field: 'name' | 'role' | 'title'): string {
   return String((item as unknown as Record<string, unknown>)[field] ?? '')
 }
 
+/** Selecciona el dato secundario más útil para el resumen de cada fila. */
 function getItemMeta(item: PortfolioItem): string {
   if ('category' in item) return item.category
   if ('company' in item) return item.company

@@ -13,6 +13,7 @@ export function DeleteConfirmation({ itemName, itemType, onCancel, onConfirm }: 
   const [deleting, setDeleting] = useState(false)
   const [error, setError] = useState('')
 
+  /** Ejecuta la baja una sola vez y mantiene el diálogo abierto si falla. */
   async function confirmDelete() {
     setDeleting(true)
     setError('')

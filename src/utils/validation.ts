@@ -14,6 +14,7 @@ const limits = {
 
 type LimitedField = keyof typeof limits
 
+/** Aplica los límites declarados y escribe el error junto al campo correspondiente. */
 function validateLength(field: LimitedField, value: string | undefined, errors: FieldErrors): void {
   const [minimum, maximum] = limits[field]
   const text = value ?? ''
@@ -22,6 +23,7 @@ function validateLength(field: LimitedField, value: string | undefined, errors: 
   else if (text.length > maximum) errors[field] = `No puede superar ${maximum} caracteres.`
 }
 
+/** Acepta valores vacíos y restringe enlaces ingresados a HTTP o HTTPS. */
 function isValidOptionalUrl(value: string | undefined): boolean {
   if (!value) return true
   try {
@@ -66,6 +68,7 @@ export function validateEntity(entity: EntityName, rawValues: FormValues) {
   return { values, errors, isValid: Object.keys(errors).length === 0 }
 }
 
+/** Normaliza un valor dinámico para validaciones exclusivamente textuales. */
 function asText(value: FormValues[string]): string {
   return typeof value === 'string' ? value : ''
 }

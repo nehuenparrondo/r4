@@ -35,6 +35,7 @@ export function AdminPanel({ open, onClose }: AdminPanelProps) {
     return () => document.body.classList.remove('panel-open')
   }, [open])
 
+  /** Configura la clave local inicial o verifica la credencial del modo activo. */
   async function handleAccess(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setAccessError('')
@@ -55,6 +56,7 @@ export function AdminPanel({ open, onClose }: AdminPanelProps) {
     }
   }
 
+  /** Borra la clave mantenida en memoria y vuelve a bloquear el panel. */
   function logout() {
     setUnlocked(false)
     setSecret('')

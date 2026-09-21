@@ -11,6 +11,7 @@ interface EntityFormProps {
   onSave: (values: FormValues) => Promise<void>
 }
 
+/** Adapta una entidad tipada al formato genérico del formulario reutilizable. */
 function buildInitialValues(entity: CollectionEntity, item: PortfolioItem | null): FormValues {
   const values = Object.fromEntries(Object.entries(item ?? {})) as FormValues
   if (entity === 'projects') {
@@ -30,12 +31,14 @@ export function EntityForm({ entity, item, onCancel, onSave }: EntityFormProps) 
 
   useEffect(() => setValues(buildInitialValues(entity, item)), [entity, item])
 
+  /** Actualiza un campo y limpia su error anterior mientras el usuario escribe. */
   function updateField(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = event.target
     setValues((current) => ({ ...current, [name]: value }))
     setErrors((current) => ({ ...current, [name]: '' }))
   }
 
+  /** Normaliza tecnologías, valida, sanitiza y delega la persistencia. */
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const technologyText = typeof values.technologies === 'string' ? values.technologies : ''

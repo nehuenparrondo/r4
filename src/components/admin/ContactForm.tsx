@@ -18,10 +18,12 @@ export function ContactForm({ secret }: ContactFormProps) {
   const [errors, setErrors] = useState<FieldErrors>({})
   const [message, setMessage] = useState('')
 
+  /** Mantiene email y teléfono sincronizados con sus controles. */
   function updateField(event: ChangeEvent<HTMLInputElement>) {
     setValues((current) => ({ ...current, [event.target.name]: event.target.value }))
   }
 
+  /** Valida y guarda contacto sin exponer el nombre protegido como campo editable. */
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const validation = validateEntity('contact', values)

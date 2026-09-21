@@ -8,6 +8,7 @@ export function FloatingControls() {
   const { theme, toggleTheme } = useTheme()
 
   useEffect(() => {
+    /** Recalcula el acceso superior solo cuando la página y el desplazamiento lo justifican. */
     function updateVisibility() {
       const pageNeedsScroll = document.documentElement.scrollHeight > window.innerHeight * 1.35
       setShowScrollTop(pageNeedsScroll && window.scrollY > window.innerHeight * 0.45)

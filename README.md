@@ -57,6 +57,20 @@ npm run typecheck
 npm run build
 ```
 
+## Abrir en otra computadora
+
+El ZIP incluye `GUIA_PARA_ABRIR_EN_LA_ESCUELA.txt` con instrucciones completas y `ABRIR_PORTFOLIO.bat` para iniciar la versión compilada en Windows.
+
+Procedimiento resumido:
+
+1. Copiar el ZIP desde el pendrive al Escritorio o a Documentos.
+2. Usar “Extraer todo”; no ejecutar el proyecto dentro del ZIP.
+3. Verificar que la computadora tenga Node.js 20 o superior.
+4. Abrir la carpeta extraída y ejecutar `ABRIR_PORTFOLIO.bat`.
+5. La primera vez se ejecuta `npm install`; después se abre `http://127.0.0.1:4173`.
+
+Si la computadora no permite instalar Node.js o no tiene Internet, la alternativa inmediata es abrir <https://r4-theta.vercel.app/>. Para desarrollo manual se puede abrir la carpeta en Visual Studio Code, ejecutar `npm install` y luego `npm run dev`.
+
 ## Configuración de Supabase
 
 1. Crear un proyecto en Supabase.

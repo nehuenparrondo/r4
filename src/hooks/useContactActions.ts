@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState, type MouseEvent } from 'react'
 
+/** Detecta dispositivos donde mailto y tel ofrecen una experiencia nativa útil. */
 function isMobileDevice() {
   return typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
 }
 
+/** Copia texto con Clipboard API y conserva un respaldo para navegadores antiguos. */
 async function copyText(value: string): Promise<void> {
   if (navigator.clipboard?.writeText) {
     await navigator.clipboard.writeText(value)
@@ -30,6 +32,7 @@ export function useContactActions() {
     return () => window.clearTimeout(timeout)
   }, [feedback])
 
+  /** Intercepta el enlace solamente en computadoras y comunica el resultado en pantalla. */
   const handleContact = useCallback(async (event: MouseEvent<HTMLAnchorElement>, value: string, label: string) => {
     if (mobileDevice) return
     event.preventDefault()

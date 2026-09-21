@@ -6,6 +6,7 @@ const isTestEnvironment = import.meta.env.MODE === 'test'
 
 export const isSupabaseConfigured = !isTestEnvironment && Boolean(supabaseUrl && supabaseAnonKey)
 
+/** Cliente público sin sesión persistente; RLS controla sus permisos reales. */
 export const supabase = isSupabaseConfigured
   ? createClient(supabaseUrl, supabaseAnonKey, {
       auth: { persistSession: false, autoRefreshToken: false },

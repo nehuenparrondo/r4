@@ -9,6 +9,7 @@ export function usePortfolioController() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
+  /** Consulta la fuente activa y reemplaza el estado completo de forma atómica. */
   const refresh = useCallback(async () => {
     setLoading(true)
     setError('')
@@ -25,6 +26,7 @@ export function usePortfolioController() {
     refresh()
   }, [refresh])
 
+  /** Guarda un registro y refresca todas las secciones que dependen de él. */
   const saveItem = useCallback(
     async (entity: EntityName, values: FormValues, secret: string) => {
       await portfolioService.save(entity, values, secret)
@@ -33,6 +35,7 @@ export function usePortfolioController() {
     [refresh],
   )
 
+  /** Elimina un registro de colección y vuelve a sincronizar el contexto. */
   const removeItem = useCallback(
     async (entity: CollectionEntity, id: string, secret: string) => {
       await portfolioService.remove(entity, id, secret)

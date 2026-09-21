@@ -1,0 +1,120 @@
+PORTFOLIO R4 — GUÍA PARA ABRIRLO EN OTRA COMPUTADORA
+Autor: PARRONDO Nehuen
+
+IMPORTANTE
+
+No trabajes directamente dentro del archivo ZIP ni desde el pendrive. Primero copiá el ZIP a la computadora y extraelo. Esto evita errores de permisos, lentitud y archivos que no se guardan.
+
+OPCIÓN 1 — LA MÁS FÁCIL, SI HAY INTERNET
+
+1. Abrí un navegador.
+2. Ingresá a:
+   https://r4-theta.vercel.app/
+3. Esta versión ya está publicada, conectada con Supabase y no necesita instalar nada.
+
+Usá esta opción para mostrar rápidamente el resultado final al profesor.
+
+OPCIÓN 2 — ABRIR EL PROYECTO DEL ZIP EN WINDOWS
+
+Requisitos de la computadora:
+- Windows 10 u 11.
+- Node.js 20 o una versión superior.
+- Internet la primera vez, para descargar las dependencias con npm.
+- Un navegador moderno como Chrome, Edge o Firefox.
+
+Pasos:
+
+1. Conectá el pendrive.
+2. Copiá Portfolio-R4-PARRONDO-Nehuen.zip al Escritorio o a Documentos.
+3. Hacé clic derecho sobre el ZIP y elegí “Extraer todo”.
+4. Entrá en la carpeta extraída.
+5. Hacé doble clic en ABRIR_PORTFOLIO.bat.
+6. La primera ejecución instalará las dependencias. Puede tardar algunos minutos.
+7. El navegador abrirá http://127.0.0.1:4173.
+8. Dejá abierta la ventana negra mientras mostrás el portfolio.
+9. Para cerrar el servidor, volvé a esa ventana y presioná Ctrl + C.
+
+Si Windows muestra una advertencia al abrir el archivo BAT, elegí “Más información” y ejecutalo únicamente si el ZIP proviene de esta entrega.
+
+OPCIÓN 3 — ABRIRLO DESDE VISUAL STUDIO CODE
+
+1. Extraé el ZIP.
+2. Abrí Visual Studio Code.
+3. Elegí Archivo > Abrir carpeta y seleccioná la carpeta extraída.
+4. Abrí Terminal > Nueva terminal.
+5. Ejecutá:
+
+   npm install
+
+6. Cuando termine, ejecutá:
+
+   npm run dev
+
+7. Abrí la dirección que muestre Vite, normalmente:
+
+   http://localhost:5173
+
+En modo desarrollo sin archivo .env, la aplicación usa el modo de demostración local. El ABM funciona y guarda los cambios en el navegador de esa computadora. Para mostrar la base Supabase real, utilizá la versión publicada de Vercel.
+
+COMANDOS IMPORTANTES
+
+npm run dev
+Inicia el proyecto para desarrollar y revisar cambios.
+
+npm run typecheck
+Comprueba que el código TypeScript no tenga errores.
+
+npm run lint
+Revisa calidad y reglas del código.
+
+npm run test
+Ejecuta las pruebas automáticas.
+
+npm run build
+Comprueba TypeScript y genera la versión optimizada dentro de dist.
+
+npm run preview
+Sirve la carpeta dist en una dirección local.
+
+SI NODE.JS NO ESTÁ INSTALADO
+
+El archivo ABRIR_PORTFOLIO.bat mostrará un mensaje y se detendrá. Si tenés permiso para instalar programas, descargá la versión LTS desde:
+
+https://nodejs.org/
+
+Si la computadora escolar no permite instalaciones, usá directamente:
+
+https://r4-theta.vercel.app/
+
+SOLUCIÓN DE PROBLEMAS
+
+“node no se reconoce”:
+Node.js no está instalado o la terminal debe cerrarse y abrirse nuevamente después de instalarlo.
+
+“npm install” falla:
+Revisá la conexión a Internet. También puede existir un bloqueo de red o falta de permisos en la computadora escolar.
+
+El navegador dice que no puede acceder:
+Esperá unos segundos y actualizá. Confirmá que la ventana del servidor siga abierta.
+
+El puerto 4173 está ocupado:
+Desde Visual Studio Code ejecutá npm run dev y usá la dirección que informe Vite.
+
+El panel Administrar solicita una clave:
+En producción utiliza la clave configurada en Supabase. En modo local, la primera apertura permite crear una clave de demostración de al menos ocho caracteres.
+
+ARCHIVOS QUE NO DEBEN COMPARTIRSE
+
+- .env
+- Contraseñas administrativas
+- Claves privadas o service_role de Supabase
+
+El ZIP entregado no contiene esos datos. La clave anon de Supabase es pública y está protegida por Row Level Security.
+
+QUÉ LLEVAR A LA ESCUELA
+
+- El archivo Portfolio-R4-PARRONDO-Nehuen.zip.
+- Esta guía, incluida dentro del ZIP.
+- La URL publicada anotada por separado: https://r4-theta.vercel.app/
+- Como respaldo, el repositorio: https://github.com/nehuenparrondo/r4
+

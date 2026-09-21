@@ -180,3 +180,124 @@ Los repositorios académicos agregados no incluyen README ni descripción públi
 14. ENTREGA
 
 El archivo ZIP de entrega excluye .git, node_modules, el archivo .env y carpetas temporales. Incluye el código fuente TypeScript/TSX, tsconfig.json, package-lock.json, README, esta documentación, las migraciones SQL, los recursos públicos y la compilación dist. No contiene archivos JSX.
+
+15. MAPA DETALLADO DE ARCHIVOS IMPORTANTES
+
+index.html:
+Documento HTML base. Define idioma, metadatos, favicon, el elemento root y la carga de src/main.tsx.
+
+src/main.tsx:
+Punto de entrada de React. Comprueba que exista el nodo root, crea la raíz de React, activa StrictMode y envuelve App con ThemeProvider y PortfolioProvider.
+
+src/App.tsx:
+Compone la única página. Ordena Header, Hero, About, Skills, Experience, Projects, Contact, Footer, controles flotantes y panel administrativo. También presenta los estados globales de carga y error.
+
+src/types/portfolio.ts:
+Fuente central de tipos. Declara entidades, datos de contacto, estructura completa del portfolio, valores de formularios y contrato del contexto. Evita duplicar tipos y permite que TypeScript detecte incompatibilidades.
+
+src/data/portfolioSeed.ts:
+Contiene el nombre protegido y los datos iniciales reales. Se utiliza como respaldo visual inmediato y como base del modo local.
+
+src/context/ThemeContext.ts y ThemeProvider.tsx:
+Definen el contrato del tema y mantienen la preferencia claro/oscuro. El provider actualiza el atributo data-theme del documento y localStorage.
+
+src/context/PortfolioContext.ts y PortfolioProvider.tsx:
+Definen y publican el estado compartido del portfolio. Permiten que cualquier sección consulte datos o ejecute acciones ABM sin pasar propiedades por muchos niveles.
+
+src/hooks/useTheme.ts:
+Valida que ThemeContext esté disponible y devuelve el tema actual y toggleTheme.
+
+src/hooks/usePortfolioData.ts:
+Valida que PortfolioContext esté disponible y devuelve datos, carga, errores y operaciones persistentes.
+
+src/hooks/usePortfolioController.ts:
+Coordina la carga inicial, refresh, altas, modificaciones y bajas. Después de cada escritura vuelve a consultar la fuente para mantener toda la interfaz sincronizada.
+
+src/hooks/useScrollSpy.ts:
+Usa IntersectionObserver para detectar la sección principal visible y actualizar el enlace activo del menú.
+
+src/hooks/useContactActions.ts:
+Detecta computadoras y celulares. En computadora copia email o teléfono con Clipboard API y muestra feedback; en celular permite mailto y tel nativos.
+
+src/services/supabaseClient.ts:
+Lee las variables VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY. Crea el cliente público solo cuando están disponibles y desactiva sesiones de autenticación innecesarias.
+
+src/services/portfolioService.ts:
+Capa principal de persistencia. Selecciona automáticamente Supabase o localStorage. Lee datos, transforma la relación de tecnologías, verifica acceso, envía RPC por POST y ejecuta ABM local o remoto.
+
+src/utils/sanitize.ts:
+Elimina HTML no permitido con DOMPurify y sanitiza todos los textos o listas de un formulario.
+
+src/utils/validation.ts:
+Aplica límites, campos obligatorios, formato de email y teléfono, tecnologías mínimas y protocolos permitidos para URLs. Devuelve valores normalizados, errores por campo y estado de validez.
+
+src/components/Header.tsx:
+Controla navegación fija, indicador de sección, menú responsive y apertura del panel administrativo.
+
+src/components/FloatingControls.tsx:
+Mantiene el selector de tema flotante y calcula cuándo debe aparecer el botón para volver arriba.
+
+src/components/Section.tsx:
+Componente reutilizable para títulos y animaciones de entrada de todas las secciones públicas.
+
+src/components/admin/AdminPanel.tsx:
+Gestiona apertura, autenticación, cierre de sesión local y selección de la entidad que se quiere administrar.
+
+src/components/admin/EntityManager.tsx:
+Lista registros y coordina agregar, modificar y solicitar la eliminación de habilidades, experiencias, proyectos y logros.
+
+src/components/admin/EntityForm.tsx:
+Genera formularios desde entityConfig, prepara valores, convierte tecnologías separadas por comas, valida y guarda.
+
+src/components/admin/DeleteConfirmation.tsx:
+Implementa la confirmación de baja dentro de React. Reemplaza confirm y alert del navegador y controla estados de progreso y error.
+
+src/components/admin/ContactForm.tsx:
+Modifica email y teléfono. El nombre PARRONDO Nehuen no forma parte de sus valores y permanece protegido.
+
+src/components/admin/entityConfig.ts:
+Describe los campos, etiquetas, tipos y nombres de cada entidad. Permite reutilizar EntityForm y EntityManager.
+
+supabase/migrations/202609200001_initial_portfolio.sql:
+Crea tablas normalizadas, restricciones, índices, RLS, funciones RPC, datos iniciales y esquema privado para el hash administrativo.
+
+supabase/migrations/202609200002_publish_urls.sql:
+Actualiza los enlaces públicos del repositorio y el despliegue.
+
+supabase/migrations/202609210001_projects_achievements.sql:
+Agrega de forma idempotente los dos proyectos académicos adicionales, sus tecnologías y los tres logros.
+
+vite.config.ts:
+Configura React, Vitest, exclusiones de pruebas y división de paquetes para optimizar la compilación.
+
+tsconfig.json:
+Activa TypeScript estricto, JSX de React, APIs del navegador, resolución moderna de módulos y verificación sin emisión.
+
+eslint.config.ts:
+Aplica reglas de JavaScript, TypeScript, hooks y actualización rápida de React. Excluye compilaciones y carpetas temporales.
+
+ABRIR_PORTFOLIO.bat:
+Asistente para Windows. Comprueba Node.js, instala dependencias si faltan, genera dist si es necesario y sirve el portfolio en el puerto 4173.
+
+GUIA_PARA_ABRIR_EN_LA_ESCUELA.txt:
+Explica métodos de apertura, requisitos, comandos, problemas frecuentes y alternativas cuando la computadora escolar no permite instalaciones.
+
+16. PROCEDIMIENTO RECOMENDADO EN LA ESCUELA
+
+Método principal con Internet:
+Abrir https://r4-theta.vercel.app/ para mostrar inmediatamente la versión publicada y conectada con Supabase.
+
+Método desde el pendrive:
+1. Copiar el ZIP a la computadora.
+2. Extraerlo completamente.
+3. Entrar en la carpeta resultante.
+4. Ejecutar ABRIR_PORTFOLIO.bat.
+5. Esperar la instalación inicial de dependencias.
+6. Mostrar el sitio en http://127.0.0.1:4173.
+7. Mantener abierta la consola mientras se utiliza el sitio.
+
+Método para explicar el código:
+Abrir la carpeta extraída en Visual Studio Code. Mostrar src/App.tsx como composición general, src/types/portfolio.ts como modelo TypeScript, src/services/portfolioService.ts como persistencia, src/components/admin como ABM y supabase/migrations como capa SQL.
+
+Limitación externa:
+Para instalar dependencias en una computadora nueva se necesita Node.js y acceso a npm. Si la institución bloquea instalaciones o Internet, debe usarse la URL de Vercel. Nunca se debe copiar una contraseña administrativa dentro del ZIP.

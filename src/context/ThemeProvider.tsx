@@ -6,6 +6,7 @@ interface ThemeProviderProps {
   children: ReactNode
 }
 
+/** Recupera una preferencia válida o utiliza el tema indicado por el sistema. */
 function getInitialTheme(): Theme {
   const storedTheme = localStorage.getItem('portfolio-theme')
   if (storedTheme === 'light' || storedTheme === 'dark') return storedTheme

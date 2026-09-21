@@ -7,6 +7,7 @@ import './styles/global.css'
 
 const rootElement = document.getElementById('root')
 
+/** Detiene el inicio con un mensaje claro si index.html no contiene el nodo requerido. */
 if (!rootElement) throw new Error('No se encontró el elemento raíz de la aplicación.')
 
 createRoot(rootElement).render(

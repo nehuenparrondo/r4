@@ -36,10 +36,12 @@ interface PortfolioService {
   remove: (entity: CollectionEntity, id: string, secret: string) => Promise<unknown>
 }
 
+/** Crea una copia independiente para impedir mutaciones del objeto semilla. */
 function cloneSeed(): PortfolioData {
   return JSON.parse(JSON.stringify(portfolioSeed)) as PortfolioData
 }
 
+/** Lee el modo de demostración y recupera la semilla ante datos ausentes o corruptos. */
 function readLocalData(): PortfolioData {
   const saved = localStorage.getItem(STORAGE_KEY)
   if (!saved) return cloneSeed()
@@ -50,21 +52,25 @@ function readLocalData(): PortfolioData {
   }
 }
 
+/** Persiste una fotografía completa del portfolio local en el navegador. */
 function writeLocalData(data: PortfolioData): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
 }
 
+/** Genera SHA-256 para no guardar la clave local en texto plano. */
 async function hashSecret(secret: string): Promise<string> {
   const bytes = new TextEncoder().encode(secret)
   const digest = await crypto.subtle.digest('SHA-256', bytes)
   return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('')
 }
 
+/** Garantiza un cliente disponible antes de realizar operaciones remotas. */
 function getSupabaseClient(): SupabaseClient {
   if (!supabase) throw new Error('Supabase no está configurado.')
   return supabase
 }
 
+/** Consulta tablas en paralelo y reconstruye las tecnologías normalizadas de cada proyecto. */
 async function getRemoteData(): Promise<PortfolioData> {
   const client = getSupabaseClient()
   const [skills, experiences, projects, achievements, contact] = await Promise.all([
@@ -93,6 +99,7 @@ async function getRemoteData(): Promise<PortfolioData> {
   }
 }
 
+/** Envía altas, modificaciones y bajas a una RPC protegida mediante POST. */
 async function mutateRemote(
   action: 'upsert' | 'delete',
   entity: EntityName,
@@ -108,16 +115,19 @@ async function mutateRemote(
   return data
 }
 
+/** Extrae un campo textual de un payload dinámico sin perder seguridad de tipos. */
 function textValue(payload: FormValues, field: string): string {
   return typeof payload[field] === 'string' ? payload[field] : ''
 }
 
+/** Inserta o reemplaza un elemento local según su identificador estable. */
 function upsertCollection<T extends { id: string }>(collection: T[], item: T): void {
   const index = collection.findIndex((current) => current.id === item.id)
   if (index >= 0) collection[index] = item
   else collection.push(item)
 }
 
+/** Convierte el formulario dinámico en la entidad tipada correspondiente. */
 function upsertLocalItem(data: PortfolioData, entity: CollectionEntity, payload: FormValues, id: string): void {
   if (entity === 'skills') {
     upsertCollection(data.skills, { id, name: textValue(payload, 'name'), category: textValue(payload, 'category') })
@@ -152,6 +162,7 @@ function upsertLocalItem(data: PortfolioData, entity: CollectionEntity, payload:
   })
 }
 
+/** Elimina de la colección correcta sin usar índices dinámicos inseguros. */
 function removeLocalItem(data: PortfolioData, entity: CollectionEntity, id: string): void {
   if (entity === 'skills') data.skills = data.skills.filter((item) => item.id !== id)
   if (entity === 'experiences') data.experiences = data.experiences.filter((item) => item.id !== id)
