@@ -318,8 +318,14 @@ declare
   seeded_technology text;
   seeded_position smallint := 0;
 begin
-  insert into public.projects (name, description, sort_order)
-  values ('Portfolio personal R4', 'Portfolio académico single-page con contenido administrable, persistencia SQL, animaciones y modo claro u oscuro.', 1)
+  insert into public.projects (name, description, repository_url, demo_url, sort_order)
+  values (
+    'Portfolio personal R4',
+    'Portfolio académico single-page con contenido administrable, persistencia SQL, animaciones y modo claro u oscuro.',
+    'https://github.com/nehuenparrondo/r4',
+    'https://r4-theta.vercel.app',
+    1
+  )
   returning id into seeded_project_id;
 
   foreach seeded_technology in array array['React', 'Vite', 'Framer Motion', 'Supabase']

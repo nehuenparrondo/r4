@@ -2,7 +2,7 @@
 
 Portfolio académico de una sola página desarrollado con React. Presenta el perfil, habilidades, logros, experiencia laboral, proyectos y datos de contacto de **PARRONDO Nehuen**. Incluye un panel protegido para administrar el contenido y persistencia en PostgreSQL mediante Supabase.
 
-> Estado de publicación: el código está listo para Git y Vercel, pero todavía no existe una URL pública porque no se proporcionaron cuentas ni credenciales externas. Los datos exactos pendientes se detallan en [Pendientes externos](#pendientes-externos).
+> Estado de publicación: proyecto publicado en [Vercel](https://r4-theta.vercel.app), código disponible en [GitHub](https://github.com/nehuenparrondo/r4) y datos conectados a Supabase.
 
 ## Requisitos cumplidos
 
@@ -128,24 +128,24 @@ Cada módulo relevante documenta qué exporta, dónde se usa y qué dependencias
 
 ## Despliegue en Vercel
 
+Despliegue de producción: <https://r4-theta.vercel.app>
+
+Repositorio público: <https://github.com/nehuenparrondo/r4>
+
 1. Crear un repositorio vacío en GitHub y subir este proyecto.
 2. Importar el repositorio desde Vercel como proyecto Vite.
 3. Cargar las tres variables indicadas en `.env.example`.
 4. Ejecutar el despliegue y copiar la URL resultante en `VITE_PUBLIC_SITE_URL`.
 5. Verificar lectura y las tres operaciones del ABM contra Supabase.
 
-`vercel.json` mantiene el fallback de la SPA. No se incluyeron URLs ficticias de repositorio o publicación.
+`vercel.json` mantiene el fallback de la SPA. Las variables de producción están configuradas en Vercel y el sitio consume los registros de Supabase.
 
 ## Pendientes externos
 
-Para completar la publicación real faltan únicamente datos o accesos que deben pertenecer al propietario:
+La publicación, el repositorio y la conexión con Supabase están completos. Solo quedan datos personales que debe aportar el propietario:
 
-- URL del proyecto Supabase y clave pública `anon`.
-- Clave administrativa elegida por PARRONDO Nehuen y su hash cargado en Supabase.
-- Cuenta o repositorio GitHub y su URL definitiva.
-- Cuenta/proyecto de Vercel y URL definitiva del despliegue.
-- Links reales de repositorios o demos de los proyectos, si existen.
-- Archivo de foto personal y CV en PDF, si se desea mostrarlos; no se inventaron ni se agregaron placeholders falsos.
+- Clave administrativa elegida por PARRONDO Nehuen y su hash cargado en Supabase. No se guarda ni se comparte en el repositorio.
+- Archivo de foto personal y CV en PDF, únicamente si se desea mostrarlos; no se inventaron ni se agregaron placeholders falsos.
 
 ## Datos usados
 
