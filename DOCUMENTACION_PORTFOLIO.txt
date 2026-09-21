@@ -3,7 +3,7 @@ DOCUMENTACIÓN TÉCNICA Y GUÍA DE FUNCIONAMIENTO
 
 1. OBJETIVO DEL PROYECTO
 
-El proyecto es un portfolio personal single-page desarrollado con React. Su objetivo es presentar el perfil, la formación, las habilidades, los logros, la experiencia laboral, los proyectos y los datos de contacto de PARRONDO Nehuen.
+El proyecto es un portfolio personal single-page desarrollado con React y TypeScript. Su objetivo es presentar el perfil, la formación, las habilidades, los logros, la experiencia laboral, los proyectos y los datos de contacto de PARRONDO Nehuen.
 
 Además de la vista pública, incluye un panel privado que permite administrar el contenido mediante operaciones de alta, baja y modificación. En producción, los datos se guardan en PostgreSQL a través de Supabase. El nombre PARRONDO Nehuen está protegido y no aparece como campo editable.
 
@@ -11,6 +11,7 @@ Además de la vista pública, incluye un panel privado que permite administrar e
 
 - Vite: prepara el entorno de desarrollo y genera la versión optimizada de producción.
 - React: construye la interfaz mediante componentes funcionales.
+- TypeScript: tipa componentes, propiedades, eventos, formularios, datos, contexto, servicios y pruebas. Los componentes utilizan la extensión .tsx y la lógica utiliza .ts.
 - Framer Motion: controla las animaciones de entrada y las interacciones visuales.
 - Supabase: expone la base PostgreSQL y las funciones RPC utilizadas por el panel administrativo.
 - DOMPurify: elimina contenido HTML no permitido antes de guardar datos.
@@ -42,6 +43,9 @@ Contiene el nombre protegido y los datos iniciales que se usan en el modo local.
 
 src/utils:
 Contiene la sanitización y las validaciones de formularios.
+
+src/types:
+Contiene los contratos TypeScript compartidos para habilidades, experiencias, proyectos, logros, contacto, entidades administrables y contexto global.
 
 supabase/migrations:
 Contiene el esquema relacional, las políticas de seguridad, las funciones administrativas y las cargas de datos versionadas.
@@ -137,8 +141,11 @@ Ejecuta las pruebas con Vitest.
 npm run lint
 Revisa el código con ESLint.
 
+npm run typecheck
+Comprueba el tipado estricto con el compilador de TypeScript sin generar archivos.
+
 npm run build
-Genera la carpeta dist lista para producción.
+Ejecuta primero el control de TypeScript y luego genera la carpeta dist lista para producción.
 
 npm run preview
 Permite revisar localmente la compilación de producción.
@@ -172,4 +179,4 @@ Los repositorios académicos agregados no incluyen README ni descripción públi
 
 14. ENTREGA
 
-El archivo ZIP de entrega excluye .git, node_modules, el archivo .env y carpetas temporales. Incluye el código fuente, package-lock.json, README, esta documentación, las migraciones SQL, los recursos públicos y la compilación dist.
+El archivo ZIP de entrega excluye .git, node_modules, el archivo .env y carpetas temporales. Incluye el código fuente TypeScript/TSX, tsconfig.json, package-lock.json, README, esta documentación, las migraciones SQL, los recursos públicos y la compilación dist. No contiene archivos JSX.

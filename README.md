@@ -1,12 +1,13 @@
 # Portfolio personal — PARRONDO Nehuen
 
-Portfolio académico de una sola página desarrollado con React. Presenta el perfil, habilidades, logros, experiencia laboral, proyectos y datos de contacto de **PARRONDO Nehuen**. Incluye un panel protegido para administrar el contenido y persistencia en PostgreSQL mediante Supabase.
+Portfolio académico de una sola página desarrollado con React y TypeScript. Presenta el perfil, habilidades, logros, experiencia laboral, proyectos y datos de contacto de **PARRONDO Nehuen**. Incluye un panel protegido para administrar el contenido y persistencia en PostgreSQL mediante Supabase.
 
 > Estado de publicación: proyecto publicado en [Vercel](https://r4-theta.vercel.app), código disponible en [GitHub](https://github.com/nehuenparrondo/r4) y datos conectados a Supabase.
 
 ## Requisitos cumplidos
 
 - Componentes funcionales y estructura modular.
+- Código fuente completamente migrado a TypeScript: componentes `.tsx`, lógica `.ts` y control estricto con `tsc`.
 - Hooks nativos: `useState`, `useEffect`, `useContext`, `useMemo` y `useCallback`.
 - Hooks propios: `useTheme`, `usePortfolioData`, `usePortfolioController` y `useScrollSpy`.
 - Eventos reales en navegación, tema, formularios y ABM.
@@ -29,7 +30,7 @@ La consigna menciona una vez a “Martín Porcelli” como nombre protegido, per
 
 ## Tecnologías
 
-- **Vite + React:** configuración simple, rápida y apropiada para una SPA académica.
+- **Vite + React + TypeScript:** SPA modular con componentes y contratos de datos tipados.
 - **Framer Motion:** animaciones declarativas coherentes con componentes React.
 - **Supabase + PostgreSQL:** base relacional, API HTTPS, funciones RPC y RLS sin mantener un servidor propio.
 - **DOMPurify:** eliminación de HTML no permitido antes de persistir entradas.
@@ -52,6 +53,7 @@ Comprobaciones disponibles:
 ```bash
 npm run test
 npm run lint
+npm run typecheck
 npm run build
 ```
 
@@ -122,6 +124,7 @@ src/
 ├── hooks/               Hooks propios
 ├── services/            Adaptadores local y Supabase
 ├── styles/              Tema y diseño responsive
+├── types/               Contratos TypeScript del dominio
 └── utils/               Sanitización y validaciones
 supabase/
 └── migrations/          Esquema, RLS, RPC y datos iniciales

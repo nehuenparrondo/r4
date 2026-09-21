@@ -299,5 +299,5 @@ label small { color: var(--danger); font-weight: 500; }
 }
 
 /* Este archivo exporta: estilos globales, temas y diseño responsive.
-   Se usa en: src/main.jsx.
+   Se usa en: src/main.tsx.
    Importa de: Google Fonts mediante CSS. */
