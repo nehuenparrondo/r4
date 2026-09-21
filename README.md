@@ -12,6 +12,7 @@ Portfolio académico de una sola página desarrollado con React. Presenta el per
 - Eventos reales en navegación, tema, formularios y ABM.
 - Animaciones consistentes con Framer Motion y respeto por `prefers-reduced-motion`.
 - Tema claro/oscuro persistido en `localStorage`.
+- Selector de tema flotante y botón contextual para volver al inicio.
 - Diseño responsive para escritorio, tablet y celular.
 - Alta, baja y modificación de habilidades, experiencias, proyectos y logros.
 - Modificación de contacto con nombre expresamente excluido.
@@ -19,6 +20,7 @@ Portfolio académico de una sola página desarrollado con React. Presenta el per
 - Validaciones equivalentes en interfaz y base de datos.
 - Sanitización de texto antes de guardar y renderizado seguro de React.
 - Modo local persistente para demostración cuando Supabase todavía no está configurado.
+- Proyectos académicos y logros reales informados por el propietario.
 - ESLint, pruebas de validación y configuración para Vercel.
 
 ## Corrección de la consigna

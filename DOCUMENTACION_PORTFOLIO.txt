@@ -1,0 +1,175 @@
+PORTFOLIO PERSONAL R4 — PARRONDO NEHUEN
+DOCUMENTACIÓN TÉCNICA Y GUÍA DE FUNCIONAMIENTO
+
+1. OBJETIVO DEL PROYECTO
+
+El proyecto es un portfolio personal single-page desarrollado con React. Su objetivo es presentar el perfil, la formación, las habilidades, los logros, la experiencia laboral, los proyectos y los datos de contacto de PARRONDO Nehuen.
+
+Además de la vista pública, incluye un panel privado que permite administrar el contenido mediante operaciones de alta, baja y modificación. En producción, los datos se guardan en PostgreSQL a través de Supabase. El nombre PARRONDO Nehuen está protegido y no aparece como campo editable.
+
+2. TECNOLOGÍAS PRINCIPALES
+
+- Vite: prepara el entorno de desarrollo y genera la versión optimizada de producción.
+- React: construye la interfaz mediante componentes funcionales.
+- Framer Motion: controla las animaciones de entrada y las interacciones visuales.
+- Supabase: expone la base PostgreSQL y las funciones RPC utilizadas por el panel administrativo.
+- DOMPurify: elimina contenido HTML no permitido antes de guardar datos.
+- Lucide React: aporta los íconos de la interfaz.
+- Vitest: ejecuta las pruebas automáticas.
+- ESLint: revisa la calidad y consistencia del código.
+
+3. ORGANIZACIÓN GENERAL
+
+La aplicación se divide en componentes públicos, componentes administrativos, contextos, hooks, servicios, datos iniciales, utilidades y estilos.
+
+src/components:
+Contiene Header, Hero, About, Skills, Experience, Projects, Contact, Footer y FloatingControls. Cada componente representa una sección o control visible.
+
+src/components/admin:
+Contiene el panel privado, los formularios reutilizables, la configuración de entidades y la confirmación integrada para eliminar registros. No se utilizan alert, confirm ni prompt nativos del navegador.
+
+src/context:
+Incluye ThemeProvider y PortfolioProvider. Estos providers comparten el tema y los datos con toda la aplicación.
+
+src/hooks:
+Incluye hooks propios para el tema, los datos, el controlador ABM, el seguimiento de secciones, las acciones de contacto y otras conductas reutilizables.
+
+src/services:
+Contiene la conexión con Supabase y el servicio que decide si trabaja con PostgreSQL o con almacenamiento local.
+
+src/data:
+Contiene el nombre protegido y los datos iniciales que se usan en el modo local.
+
+src/utils:
+Contiene la sanitización y las validaciones de formularios.
+
+supabase/migrations:
+Contiene el esquema relacional, las políticas de seguridad, las funciones administrativas y las cargas de datos versionadas.
+
+4. FUNCIONAMIENTO DE LA PÁGINA PÚBLICA
+
+Header:
+Muestra la identidad NP, la navegación entre secciones y el botón Administrar. En pantallas pequeñas, la navegación se convierte en un menú desplegable.
+
+Hero:
+Presenta el nombre protegido, el perfil técnico y los accesos de contacto. En una computadora, los botones de email y teléfono copian el dato al portapapeles y muestran una confirmación dentro de la página. En un celular, conservan el comportamiento nativo de correo y llamada.
+
+Sobre mí:
+Describe el perfil, la formación secundaria y primaria, utilizando únicamente los datos aportados por el propietario.
+
+Habilidades y logros:
+Las habilidades se muestran como tarjetas. Los logros se presentan uno debajo de otro en una lista visual. Ambos grupos se leen desde la base de datos o desde el modo local.
+
+Experiencia:
+Presenta los trabajos y actividades en tarjetas adaptables. Cada registro incluye puesto, empresa o ámbito, descripción y período cuando está disponible.
+
+Proyectos:
+Cada proyecto usa el mismo formato: número visual, nombre, descripción, tecnologías y enlaces. Los proyectos cargados son el Portfolio R4, APIs — Fetch, Axios, BBDD — JS5 y Express y DHTML — NJS3.
+
+Contacto:
+Permite copiar email y teléfono en computadoras. En celulares abre la aplicación correspondiente. WhatsApp utiliza una URL web compatible con computadoras y dispositivos móviles.
+
+Controles flotantes:
+El botón de tema permanece en la esquina inferior derecha. Cambia entre modo oscuro y claro y guarda la preferencia en localStorage. El botón para volver arriba aparece únicamente cuando la página tiene suficiente altura y el usuario se desplazó hacia abajo.
+
+5. PANEL ADMINISTRATIVO Y ABM
+
+El botón Administrar abre un panel lateral protegido por clave. La clave no se guarda en el código ni en las variables públicas. PostgreSQL conserva únicamente un hash bcrypt dentro de un esquema privado.
+
+Las entidades administrables son:
+- Habilidades.
+- Experiencias.
+- Proyectos y sus tecnologías.
+- Logros.
+- Datos de contacto.
+
+Alta:
+El usuario abre un formulario, completa los campos y guarda. La interfaz valida y sanitiza los datos antes de enviarlos.
+
+Modificación:
+El botón de edición carga los datos actuales en el mismo formulario reutilizable.
+
+Baja:
+El botón de eliminación abre una confirmación diseñada dentro de React. Solo al confirmar se ejecuta la eliminación. No se usan cuadros de diálogo nativos.
+
+6. PERSISTENCIA Y BASE DE DATOS
+
+La base usa tablas separadas para skills, experiences, projects, technologies, project_technologies, achievements y contact. Las tecnologías están normalizadas en un catálogo y se vinculan con proyectos mediante una tabla muchos-a-muchos.
+
+Las lecturas públicas utilizan solicitudes GET porque no contienen claves ni datos privados. La verificación de acceso y todas las escrituras usan funciones RPC mediante POST, enviando los parámetros dentro del cuerpo HTTPS.
+
+Row Level Security permite leer el contenido público y bloquea escrituras directas. Las altas, modificaciones y bajas se realizan exclusivamente mediante funciones SECURITY DEFINER que verifican la clave administrativa y aceptan una lista cerrada de entidades.
+
+7. MODO LOCAL
+
+Si VITE_SUPABASE_URL o VITE_SUPABASE_ANON_KEY no están configuradas, el portfolio activa un modo de demostración. En ese modo, los datos y el hash SHA-256 de una clave local se guardan en localStorage. Este mecanismo permite evaluar el ABM sin conectarse a Internet, pero la producción utiliza PostgreSQL.
+
+8. TEMA Y DISEÑO RESPONSIVE
+
+El tema se guarda en localStorage bajo la clave portfolio-theme. Al iniciar, la aplicación recupera la preferencia guardada o utiliza la configuración del sistema.
+
+El diseño oscuro combina fondos casi negros con acentos rosas. El tema claro conserva la misma identidad con fondos claros y rosas más profundos. Las grillas cambian automáticamente según el ancho disponible para mantener una correcta lectura en escritorio, tablet y celular.
+
+9. SEGURIDAD
+
+- La clave administrativa no forma parte del repositorio.
+- La clave se compara contra un hash bcrypt privado.
+- RLS bloquea escrituras públicas directas.
+- Las RPC administrativas usan POST.
+- DOMPurify elimina HTML no permitido.
+- React escapa el texto al renderizar.
+- Las URLs se validan para aceptar únicamente HTTP o HTTPS.
+- Los formularios limitan longitudes y campos obligatorios.
+- La eliminación requiere una confirmación interna.
+- El archivo .env está excluido de Git.
+
+10. COMANDOS DE DESARROLLO
+
+npm install
+Instala las dependencias.
+
+npm run dev
+Inicia el servidor local de Vite.
+
+npm run test
+Ejecuta las pruebas con Vitest.
+
+npm run lint
+Revisa el código con ESLint.
+
+npm run build
+Genera la carpeta dist lista para producción.
+
+npm run preview
+Permite revisar localmente la compilación de producción.
+
+11. VARIABLES DE ENTORNO
+
+VITE_SUPABASE_URL:
+Dirección pública del proyecto Supabase.
+
+VITE_SUPABASE_ANON_KEY:
+Clave pública utilizada por el cliente. RLS impide que esta clave realice escrituras directas.
+
+VITE_PUBLIC_SITE_URL:
+Dirección pública final del portfolio.
+
+Los valores reales se guardan en .env, archivo que no se incluye en Git ni en el entregable.
+
+12. PRUEBAS Y DESPLIEGUE
+
+Antes de entregar se ejecutan pruebas, lint y build. Vercel construye automáticamente el proyecto desde la rama main de GitHub. La versión publicada se encuentra en:
+
+https://r4-theta.vercel.app
+
+El repositorio principal se encuentra en:
+
+https://github.com/nehuenparrondo/r4
+
+13. DATOS QUE NO SE INVENTARON
+
+Los repositorios académicos agregados no incluyen README ni descripción pública. Por ese motivo, sus descripciones se limitan a los temas explícitos presentes en los nombres de los repositorios. No se agregaron fechas, instituciones, enlaces de demostración, fotografías ni datos personales no proporcionados.
+
+14. ENTREGA
+
+El archivo ZIP de entrega excluye .git, node_modules, el archivo .env y carpetas temporales. Incluye el código fuente, package-lock.json, README, esta documentación, las migraciones SQL, los recursos públicos y la compilación dist.

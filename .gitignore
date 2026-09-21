@@ -9,3 +9,4 @@ Thumbs.db
 *.log
 .vite/
 .sites-runtime/
+/outputs/

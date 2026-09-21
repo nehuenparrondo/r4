@@ -8,6 +8,7 @@ import { Experience } from './components/Experience'
 import { Projects } from './components/Projects'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
+import { FloatingControls } from './components/FloatingControls'
 import { AdminPanel } from './components/admin/AdminPanel'
 import { usePortfolioData } from './hooks/usePortfolioData'
 
@@ -32,6 +33,7 @@ export default function App() {
         </div>
       </main>
       <Footer />
+      <FloatingControls />
       <AdminPanel open={adminOpen} onClose={() => setAdminOpen(false)} />
     </>
   )

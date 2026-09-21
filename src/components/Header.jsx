@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Menu, Moon, Sun, X } from 'lucide-react'
-import { useTheme } from '../hooks/useTheme'
+import { Menu, X } from 'lucide-react'
 import { useScrollSpy } from '../hooks/useScrollSpy'
 
 const navigation = [
@@ -15,7 +14,6 @@ const navigation = [
 /** Navegación fija con indicador de sección, menú móvil y selector de tema. */
 export function Header({ onOpenAdmin }) {
   const [menuOpen, setMenuOpen] = useState(false)
-  const { theme, toggleTheme } = useTheme()
   const sectionIds = useMemo(() => navigation.map(([id]) => id), [])
   const activeSection = useScrollSpy(sectionIds)
 
@@ -52,9 +50,6 @@ export function Header({ onOpenAdmin }) {
         <button className="text-button" type="button" onClick={onOpenAdmin}>
           Administrar
         </button>
-        <button className="icon-button" type="button" onClick={toggleTheme} aria-label="Cambiar tema">
-          {theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
-        </button>
       </div>
     </header>
   )
@@ -62,4 +57,4 @@ export function Header({ onOpenAdmin }) {
 
 // Este archivo exporta: Header.
 // Se usa en: src/App.jsx.
-// Importa de: Lucide React y hooks propios de tema y scroll.
+// Importa de: Lucide React y el hook de seguimiento de scroll.
