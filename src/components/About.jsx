@@ -4,7 +4,7 @@ import { Section } from './Section'
 /** Resume el perfil real y la formación informada por el propietario. */
 export function About() {
   return (
-    <Section id="sobre-mi" eyebrow="01 · Perfil" title="Sobre mí" className="about-section">
+    <Section id="sobre-mi" eyebrow="Perfil técnico" title="Aprender, construir, mejorar." className="about-section">
       <div className="about-grid">
         <p className="about-lead">
           Actualmente curso el 7.º año de la Escuela de Educación Secundaria Técnica N.º 5, en la orientación

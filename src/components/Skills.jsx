@@ -10,7 +10,7 @@ export function Skills() {
   const { data } = usePortfolioData()
 
   return (
-    <Section id="habilidades" eyebrow="02 · Capacidades" title="Habilidades y logros">
+    <Section id="habilidades" eyebrow="Herramientas" title="Tecnologías que estoy desarrollando">
       <div className="skills-layout">
         <div className="skill-cloud" aria-label="Listado de habilidades">
           {data.skills.map((skill, index) => (

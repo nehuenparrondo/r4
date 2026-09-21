@@ -7,7 +7,7 @@ export function Experience() {
   const { data } = usePortfolioData()
 
   return (
-    <Section id="experiencia" eyebrow="03 · Recorrido" title="Experiencia laboral">
+    <Section id="experiencia" eyebrow="Experiencia" title="Recorridos que me formaron">
       <div className="timeline">
         {data.experiences.map((experience) => (
           <article className="timeline-item" key={experience.id}>

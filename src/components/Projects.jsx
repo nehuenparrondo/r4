@@ -10,7 +10,7 @@ export function Projects() {
   const { data } = usePortfolioData()
 
   return (
-    <Section id="proyectos" eyebrow="04 · Trabajo" title="Proyectos">
+    <Section id="proyectos" eyebrow="Trabajo seleccionado" title="Proyectos y práctica">
       <div className="project-grid">
         {data.projects.map((project, index) => (
           <AnimatedArticle className="project-card" key={project.id} whileHover={{ y: -7 }}>
