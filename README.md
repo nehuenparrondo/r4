@@ -97,6 +97,8 @@ Cumplimiento de normalización:
 
 - Credenciales y URLs se leen desde variables de entorno excluidas por Git.
 - RLS permite lectura pública y niega escrituras directas.
+- Las solicitudes GET se limitan a leer contenido público y nunca incluyen la clave administrativa.
+- La validación de la clave y todas las altas, modificaciones y bajas usan funciones RPC mediante POST, con los datos en el cuerpo HTTPS.
 - Las operaciones de escritura usan RPC con parámetros y una lista cerrada de entidades; no concatenan SQL.
 - El hash bcrypt se guarda en un esquema privado no expuesto por la API.
 - Las restricciones `CHECK` replican límites críticos del front-end.

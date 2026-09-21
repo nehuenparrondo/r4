@@ -121,7 +121,6 @@ button { color: inherit; }
 .hero h1 { margin: 0; font: 700 clamp(4rem, 10vw, 9.5rem)/0.83 'Space Grotesk', sans-serif; letter-spacing: -0.085em; text-transform: uppercase; }
 .hero h1 span { display: block; color: transparent; -webkit-text-stroke: 1px var(--muted); }
 .hero-role { max-width: 42rem; margin: 2rem 0 0.4rem; font: 600 clamp(1.25rem, 2.4vw, 2rem)/1.3 'Space Grotesk', sans-serif; }
-.hero-areas { max-width: 43rem; margin: 0; color: var(--muted); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
 .button { min-height: 2.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem; padding: 0.65rem 1.1rem; border: 1px solid transparent; border-radius: 0.55rem; cursor: pointer; font-weight: 700; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; }
 .button:hover { transform: translateY(-2px); }
@@ -230,9 +229,13 @@ label small { color: var(--danger); font-weight: 500; }
 .row-actions { display: flex; gap: 0.45rem; }
 .row-actions .icon-button { width: 2.3rem; height: 2.3rem; }
 .form-overlay { z-index: 120; display: grid; place-items: center; padding: 1rem; }
-.entity-form { width: min(35rem, 100%); max-height: calc(100vh - 2rem); overflow: auto; display: grid; gap: 1rem; padding: 1.3rem; border: 1px solid var(--border); background: var(--bg); box-shadow: var(--shadow); }
+.entity-form, .confirmation-dialog { width: min(35rem, 100%); max-height: calc(100vh - 2rem); overflow: auto; display: grid; gap: 1rem; padding: 1.3rem; border: 1px solid var(--border); background: var(--bg); box-shadow: var(--shadow); }
+.confirmation-dialog { width: min(30rem, 100%); }
+.confirmation-dialog > p { margin: 0; color: var(--muted); line-height: 1.65; }
+.confirmation-dialog > p strong { color: var(--text); }
 .form-heading { display: flex; align-items: center; justify-content: space-between; }
 .form-actions { display: flex; justify-content: flex-end; gap: 0.65rem; padding-top: 0.4rem; }
+.danger-button { display: inline-flex; align-items: center; gap: 0.45rem; background: var(--danger); color: #fff; border-color: var(--danger); }
 .form-error { padding: 0.65rem; border: 1px solid color-mix(in srgb, var(--danger), transparent 60%); background: color-mix(in srgb, var(--danger), transparent 90%); color: var(--danger) !important; font-size: 0.88rem; }
 .contact-form { display: grid; gap: 1rem; }
 .protected-field { padding: 0.8rem; border-left: 3px solid var(--accent); background: var(--accent-soft); color: var(--muted); font-size: 0.86rem; }

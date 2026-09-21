@@ -69,7 +69,7 @@ export function EntityForm({ entity, item, onCancel, onSave }) {
           </label>
         ))}
 
-        {submitError && <p className="form-error" role="alert">{submitError}</p>}
+        {submitError && <p className="form-error" role="status">{submitError}</p>}
         <div className="form-actions">
           <button className="button secondary" type="button" onClick={onCancel}>Cancelar</button>
           <button className="button primary" type="submit" disabled={saving}>{saving ? 'Guardando…' : 'Guardar'}</button>

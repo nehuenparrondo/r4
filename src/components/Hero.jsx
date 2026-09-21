@@ -23,7 +23,6 @@ export function Hero() {
           {PERSON_NAME.split(' ')[1]}
         </h1>
         <p className="hero-role">Estudiante de la EESTN5 · orientación informática</p>
-        <p className="hero-areas">Gomería agrovial · Mecánica · Industria textil · Desarrollo web</p>
         <div className="hero-actions">
           <a className="button primary" href={`mailto:${data.contact.email}`}>
             <Mail size={18} /> Escribime

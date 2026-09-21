@@ -70,7 +70,7 @@ export function AdminPanel({ open, onClose }) {
             <h3>{requiresSetup ? 'Creá una clave local' : 'Acceso protegido'}</h3>
             <p>{requiresSetup ? 'Esta clave protege el modo de demostración en este dispositivo.' : 'Ingresá la clave administrativa para modificar el contenido.'}</p>
             <label><span>Clave de acceso</span><input type="password" value={secret} minLength="8" onChange={(event) => setSecret(event.target.value)} autoComplete="current-password" required /></label>
-            {accessError && <p className="form-error" role="alert">{accessError}</p>}
+            {accessError && <p className="form-error" role="status">{accessError}</p>}
             <button className="button primary" type="submit">{requiresSetup ? 'Crear clave y entrar' : 'Ingresar'}</button>
           </form>
         ) : (

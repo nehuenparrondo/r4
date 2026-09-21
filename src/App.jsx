@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AlertTriangle, LoaderCircle } from 'lucide-react'
+import { CircleX, LoaderCircle } from 'lucide-react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { About } from './components/About'
@@ -20,7 +20,7 @@ export default function App() {
     <>
       <Header onOpenAdmin={() => setAdminOpen(true)} />
       {loading && <div className="status-banner"><LoaderCircle className="spin" size={18} /> Actualizando contenido…</div>}
-      {error && <div className="status-banner error" role="alert"><AlertTriangle size={18} /> {error}</div>}
+      {error && <div className="status-banner error" role="status"><CircleX size={18} /> {error}</div>}
       <main>
         <Hero />
         <div className="content-shell">
